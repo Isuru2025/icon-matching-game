@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Icon Matching Game</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- BACKGROUND VIDEO -->
+<video autoplay muted loop playsinline class="bg-video">
+  <source src="bg.mp4" type="video/mp4" />
+</video>
+
+<div class="app">
+
+  <div class="top-bar">
+    <select id="level">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <button id="themeToggle">🌙</button>
+  </div>
+
+  <h1>Icon Matching Game</h1>
+
+  <div class="stats">
+    <span id="moves">Moves: 0</span>
+    <span id="time">Time: 0s</span>
+    <span id="stars">⭐⭐⭐</span>
+  </div>
+
+  <div id="deck" class="deck"></div>
+
+  <div class="controls">
+    <button id="restart">Restart</button>
+    <button id="solve">AI Solve 🤖</button>
+  </div>
+
+  <h2>🏆 Leaderboard (<span id="levelLabel">Easy</span>)</h2>
+  <ul id="leaderboard"></ul>
+
+  <!-- WIN MODAL -->
+  <div id="winModal" class="modal">
+    <div class="modal-content">
+      <h2>🎉 You Win!</h2>
+      <p id="finalStats"></p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+  </div>
+
+
+  <!-- 🔥 FIREBASE v10 (AUTH + FIRESTORE) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      orderBy,
+      limit,
+      where,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import {
+      getAuth,
+      signInAnonymously,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD_R5PnAojCN71vsizTlqt1B0Ag8ILhtMU",
+      authDomain: "icon-matching-game-8c9ae.firebaseapp.com",
+      projectId: "icon-matching-game-8c9ae",
+      storageBucket: "icon-matching-game-8c9ae.appspot.com",
+      messagingSenderId: "1061638158656",
+      appId: "1:1061638158656:web:54d207f538ffc60c3fa2a5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    signInAnonymously(auth);
+
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        window.uid = user.uid;
+      }
+    });
+
+    window.db = db;
+    window.fb = {
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      orderBy,
+      limit,
+      where,
+      serverTimestamp
+    };
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
