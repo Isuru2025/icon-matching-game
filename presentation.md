@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./banner2.png" alt="Icon Matching Game" width="100%" />
+  <img src="./banner2.png" alt="Icon Matching Game" width="50%" />
 </p>
 
 <h1 align="center">🎮 アイコン・マッチング・ゲーム</h1>
