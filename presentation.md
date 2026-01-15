@@ -3,6 +3,7 @@
 </p>
 
 <h1 align="center">🎮 アイコン・マッチング・ゲーム</h1>
+<h2 align="center">イスル　アルナル　25s17</h2>
 
 <p align="center">
 直感操作 × レベル選択 × AIサポート<br/>
